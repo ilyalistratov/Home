@@ -1,53 +1,39 @@
 ---
-- name: install maven
-  hosts: sbor
+- name: install bild app
+  hosts: slave1
   become: yes
 
   tasks:
-  - name: ensure mvn package is presents
-    apt:
-     name: maven
-     state: present
+    - name: Ensure maven is present
+      apt:
+        name: maven
+        state: present
 
-- name: install java
-  hosts: sbor
+    - name: Ensure git is present
+      apt:
+        name: git
+        state: present
+
+- name: check app
+  git:
+    repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+    dest: /home/
+
+- name: bild code
+  shell: "cd /home && mvn package"
+
+- name: install prod app
+  hosts: slave2
   become: yes
 
   tasks:
-  - name: Ensure java package is present
-    apt:
-     name: default-jdk
-     state: present
+    - name: Ensure tomcat9 is present
+      apt:
+        name: tomcat9
+        state: present
 
-- name: install git
-  hosts: sbor
-  become: yes
-
-  tasks:
-  - name: Ensure git package is present
-    apt:
-     name: git
-     state: present
-
-  - name: git repo
-    git: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-     repo: /home/
-
-  - name: cp bild code
-     copy:
-      src: hello-1.0.war
-      dest: /home
-       shell: "mvn package"
-
-- name: install tomcat9
-  hosts: prod
-  become: yes
-
-  tasks:
-  - name: install tomacat9
-    apt:
-      name: tomcat9
-      state: present
-
-  - name: start war file
-    dest: /home
+- name: copy file
+  synchronize:
+    src: /target/hello-1.0.war
+    dest: /var/lib/tomcat9/webapps/
+  delegate_to: 20.67.26.83
