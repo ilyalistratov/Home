@@ -14,7 +14,7 @@
         name: git
         state: present
 
-- name: check app
+- name: ckeck app
   git:
     repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
     dest: /home/
