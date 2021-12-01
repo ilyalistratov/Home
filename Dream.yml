@@ -1,4 +1,14 @@
 ---
+- name: install prod app
+  hosts: slave2
+  become: yes
+
+  tasks:
+    - name: Ensure tomcat9 is present
+      apt:
+        name: tomcat9
+        state: present
+
 - name: install bild app
   hosts: slave1
   become: yes
@@ -31,13 +41,5 @@
       delegate_to: 20.67.26.83
 
 
-- name: install prod app
-  hosts: slave2
-  become: yes
 
-  tasks:
-    - name: Ensure tomcat9 is present
-      apt:
-        name: tomcat9
-        state: present
 
