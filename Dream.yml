@@ -37,8 +37,8 @@
     - name: copy file
       synchronize:
         src: /target/hello-1.0.war
-        dest: rsync://var/lib/tomcat9/webapps/
-      delegate_to: slave2
+        dest: /home/111/
+      delegate_to: master
 
 
 
