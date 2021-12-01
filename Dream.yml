@@ -17,7 +17,7 @@
     - name: Ckeck up
       git:
         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-        dest: /home/
+        dest: /home/repo/
         clone: yes
         update: yes
 
