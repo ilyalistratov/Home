@@ -22,7 +22,7 @@
         update: yes
 
     - name: bild code
-      shell: "cd /home && mvn package"
+      shell: "cd /home/repo && mvn package"
 
     - name: copy file
       synchronize:
