@@ -14,13 +14,20 @@
         name: git
         state: present
 
-- name: ckeck app
-  git:
-    repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-    dest: /home/
+    - name: Ckeck up
+      git:
+        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+        dest: /home/
 
-- name: bild code
-  shell: "cd /home && mvn package"
+    - name: bild code
+      shell: "cd /home && mvn package"
+
+    - name: copy file
+      synchronize:
+        src: /target/hello-1.0.war
+        dest: /var/lib/tomcat9/webapps/
+      delegate_to: 20.67.26.83
+
 
 - name: install prod app
   hosts: slave2
@@ -32,8 +39,3 @@
         name: tomcat9
         state: present
 
-- name: copy file
-  synchronize:
-    src: /target/hello-1.0.war
-    dest: /var/lib/tomcat9/webapps/
-  delegate_to: 20.67.26.83
