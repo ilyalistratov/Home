@@ -38,7 +38,7 @@
       synchronize:
         src: /target/hello-1.0.war
         dest: /var/lib/tomcat9/webapps/
-      delegate_to: 20.67.26.83
+      delegate_to: slave2
 
 
 
