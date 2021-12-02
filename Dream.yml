@@ -37,7 +37,7 @@
     - name: copy file
       synchronize:
         mode: pull
-        src: /home/repo /boxfuse-sample-java-war-hello/target/*.war
+        src: /home/repo/boxfuse-sample-java-war-hello/target/*.war
         dest: /tmp
       delegate_to: 127.0.0.1
 
