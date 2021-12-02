@@ -1,2 +1,9 @@
 ---
 # defaults file for build
+- name: install prog
+  apt: name={{item}} state=present
+  with_items:
+    - tree
+    - git
+    - maven
+    - mc
