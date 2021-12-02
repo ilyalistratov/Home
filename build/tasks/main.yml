@@ -1,2 +1,18 @@
 ---
 # tasks file for build
+    - name: Ckeck up
+      git:
+        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+        dest: /home/repo/
+        clone: yes
+        update: yes
+
+    - name: bild code
+      shell: "cd /home/repo && mvn package"
+
+    - name: copy file
+      synchronize:
+        mode: pull
+        src: /home/repo/target/*.war
+        dest: /tmp
+      delegate_to: 127.0.0.1
