@@ -36,9 +36,9 @@
 
     - name: copy file
       synchronize:
-        src: /target/hello-1.0.war
-        dest: /tmp
         mode: pull
+        src: /home/repo /boxfuse-sample-java-war-hello/target/*.war
+        dest: /tmp
       delegate_to: 127.0.0.1
 
 - name: ensure war file in slave2
